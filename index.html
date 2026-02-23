@@ -94,7 +94,6 @@
             <!-- Social + Mobile Toggle -->
             <div class="flex items-center gap-x-6">
                 <div id="nav-social" class="hidden md:flex items-center gap-x-5 text-zinc-400"></div>
-                
                 <button onclick="toggleMobileMenu()" 
                         class="md:hidden w-11 h-11 flex items-center justify-center text-2xl hover:text-emerald-400 transition-colors">
                     <i id="menu-icon" class="fa-solid fa-bars"></i>
@@ -111,6 +110,7 @@
                 <a onclick="showPage('contact');toggleMobileMenu()" class="hover:text-emerald-400">Contact</a>
                 
                 <div class="pt-6 border-t border-zinc-700 flex gap-x-8 text-2xl" id="mobile-social"></div>
+                <a href="https://www.linkedin.com/in/janithwaduge/" target="_blank" class="hover:text-emerald-400 transition-colors" title="LinkedIn"><i class="fa-brands fa-linkedin text-2xl"></i></a>
             </div>
         </div>
     </nav>
@@ -157,6 +157,10 @@
                             <div>
                                 <div class="text-xs uppercase tracking-widest text-zinc-500">Location</div>
                                 <span id="hero-location" class="text-zinc-300">Colombo, Sri Lanka</span>
+                            </div>
+                            <div>
+                                <div class="text-xs uppercase tracking-widest text-zinc-500">LinkedIn</div>
+                                <a href="https://www.linkedin.com/in/janithwaduge/" target="_blank" class="hover:text-emerald-400 transition-colors">janithwaduge</a>
                             </div>
                         </div>
                     </div>
@@ -281,6 +285,17 @@
                                     <a id="contact-whatsapp" href="#" target="_blank" class="text-xl hover:text-emerald-400">+94775896223</a>
                                 </div>
                             </div>
+
+                            <!-- LinkedIn -->
+                            <div class="flex items-center gap-6">
+                                <div class="w-12 h-12 bg-blue-700 rounded-2xl flex items-center justify-center text-2xl">
+                                    <i class="fa-brands fa-linkedin"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-zinc-500">Connect on LinkedIn</div>
+                                    <a href="https://www.linkedin.com/in/janithwaduge/" target="_blank" class="text-xl hover:text-emerald-400">janithwaduge</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -317,7 +332,7 @@
     <footer class="bg-zinc-950 border-t border-zinc-900 py-12">
         <div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-y-6 text-sm text-zinc-500">
             <div>© 2026 JanithWaduge. All rights reserved.</div>
-            <div class="flex gap-x-8">
+            <div class="flex gap-x-8 items-center">
                 <a href="#" onclick="showPage('home')" class="hover:text-zinc-300">Home</a>
                 <a href="#" onclick="showPage('projects')" class="hover:text-zinc-300">Projects</a>
                 <a href="#" onclick="showPage('blog')" class="hover:text-zinc-300">Blog</a>
