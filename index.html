@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamuditha | Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --accent: 16 185 129; /* emerald-500 */
+        }
+        
+        .tail-container {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: rgb(16 185 129);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .modal {
+            animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1f2937 100%);
+        }
+    </style>
+</head>
+<body class="tail-container bg-zinc-950 text-zinc-100 overflow-x-hidden">
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 bg-zinc-900/90 backdrop-blur-lg border-b border-zinc-800 z-50">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <!-- Logo -->
+            <div onclick="showPage('home')" class="flex items-center gap-x-3 cursor-pointer group">
+                <div class="w-9 h-9 bg-emerald-500 rounded-2xl flex items-center justify-center text-white font-bold text-2xl transition-transform group-active:scale-95">C</div>
+                <div>
+                    <span class="logo-font text-2xl font-semibold tracking-tighter">Chamuditha</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-x-10 text-sm font-medium">
+                <a onclick="showPage('home')" class="nav-link cursor-pointer active">HOME</a>
+                <a onclick="showPage('projects')" class="nav-link cursor-pointer">PROJECTS</a>
+                <a onclick="showPage('blog')" class="nav-link cursor-pointer">BLOG</a>
+                <a onclick="showPage('contact')" class="nav-link cursor-pointer">CONTACT</a>
+            </div>
+
+            <!-- Social + Mobile Toggle -->
+            <div class="flex items-center gap-x-6">
+                <div id="nav-social" class="hidden md:flex items-center gap-x-5 text-zinc-400"></div>
+                
+                <button onclick="toggleMobileMenu()" 
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-2xl hover:text-emerald-400 transition-colors">
+                    <i id="menu-icon" class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-zinc-800 py-6">
+            <div class="flex flex-col gap-y-6 px-8 text-lg font-medium">
+                <a onclick="showPage('home');toggleMobileMenu()" class="hover:text-emerald-400">Home</a>
+                <a onclick="showPage('projects');toggleMobileMenu()" class="hover:text-emerald-400">Projects</a>
+                <a onclick="showPage('blog');toggleMobileMenu()" class="hover:text-emerald-400">Blog</a>
+                <a onclick="showPage('contact');toggleMobileMenu()" class="hover:text-emerald-400">Contact</a>
+                
+                <div class="pt-6 border-t border-zinc-700 flex gap-x-8 text-2xl" id="mobile-social"></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 min-h-screen pb-24">
+        <!-- HOME PAGE -->
+        <div id="home-page" class="page">
+            <!-- HERO -->
+            <section id="hero" class="hero-bg min-h-screen flex items-center">
+                <div class="max-w-screen-2xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <div class="inline-flex items-center gap-x-2 bg-zinc-900 border border-zinc-700 rounded-3xl px-5 py-2 text-sm">
+                            <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                            <span class="font-medium text-emerald-400">Available for opportunities</span>
+                        </div>
+                        
+                        <h1 id="hero-name" class="text-6xl md:text-7xl font-semibold leading-none tracking-tighter logo-font">
+                            Chamuditha
+                        </h1>
+                        <p id="hero-title" class="text-3xl text-zinc-400 font-light">Software Engineer</p>
+                        
+                        <p id="hero-summary" class="max-w-lg text-lg text-zinc-400 leading-relaxed">
+                            Passionate full-stack developer building exceptional digital experiences from Colombo, Sri Lanka.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="showPage('projects')" 
+                                    class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 transition-all rounded-2xl font-semibold flex items-center gap-x-3">
+                                <span>View Projects</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <button onclick="showPage('contact')" 
+                                    class="px-8 py-4 border border-zinc-400 hover:border-white transition-all rounded-2xl font-semibold">
+                                Get In Touch
+                            </button>
+                        </div>
+
+                        <!-- Quick Personal Info -->
+                        <div class="flex flex-wrap gap-x-10 gap-y-6 pt-8 border-t border-zinc-800">
+                            <div>
+                                <div class="text-xs uppercase tracking-widest text-zinc-500">Email</div>
+                                <a id="hero-email" href="#" class="hover:text-emerald-400 transition-colors">jwaduge819@gmail.com</a>
+                            </div>
+                            <div>
+                                <div class="text-xs uppercase tracking-widest text-zinc-500">Location</div>
+                                <span id="hero-location" class="text-zinc-300">Colombo, Sri Lanka</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Picture -->
+                    <div class="flex justify-center md:justify-end">
+                        <div class="relative">
+                            <div class="absolute -inset-6 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-[4rem] -rotate-6"></div>
+                            <img id="hero-image" 
+                                 src="https://picsum.photos/id/64/600/600" 
+                                 alt="Chamuditha"
+                                 class="w-80 h-80 md:w-96 md:h-96 object-cover rounded-3xl shadow-2xl border-8 border-zinc-900 relative z-10">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT / EDUCATION / SKILLS -->
+            <section class="max-w-screen-2xl mx-auto px-8 py-24">
+                <div class="grid lg:grid-cols-12 gap-16">
+                    <!-- Bio -->
+                    <div class="lg:col-span-5">
+                        <h2 class="text-4xl font-semibold mb-8">About Me</h2>
+                        <div id="about-bio" class="prose prose-invert text-zinc-300 text-lg leading-relaxed">
+                            <p>I'm a results-driven Software Engineer with 3+ years of experience crafting modern web applications. I love turning complex problems into simple, beautiful solutions.</p>
+                        </div>
+                        
+                        <!-- Education -->
+                        <div class="mt-16">
+                            <h3 class="uppercase text-xs tracking-widest text-zinc-500 mb-6">Education</h3>
+                            <div id="education-list" class="space-y-10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="lg:col-span-7">
+                        <h3 class="uppercase text-xs tracking-widest text-zinc-500 mb-6">Tech Stack</h3>
+                        <div id="skills-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-4"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PROJECTS PAGE -->
+        <div id="projects-page" class="page hidden">
+            <div class="max-w-screen-2xl mx-auto px-8 py-16">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="text-emerald-400 text-sm font-medium tracking-widest">PORTFOLIO</span>
+                        <h2 class="text-5xl font-semibold mt-2">Featured Projects</h2>
+                    </div>
+                    <a href="https://github.com/chamuditha" target="_blank"
+                       class="hidden md:flex items-center gap-x-3 text-zinc-400 hover:text-white transition-colors">
+                        <span class="text-sm">All on GitHub</span>
+                        <i class="fa-brands fa-github text-2xl"></i>
+                    </a>
+                </div>
+
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+            </div>
+        </div>
+
+        <!-- BLOG PAGE -->
+        <div id="blog-page" class="page hidden">
+            <div class="max-w-screen-2xl mx-auto px-8 py-16">
+                <div class="mb-12">
+                    <span class="text-emerald-400 text-sm font-medium tracking-widest">WRITING</span>
+                    <h2 class="text-5xl font-semibold mt-2">Blog Articles</h2>
+                </div>
+
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"></div>
+            </div>
+        </div>
+
+        <!-- BLOG ARTICLE PAGE -->
+        <div id="blog-article-page" class="page hidden">
+            <div class="max-w-4xl mx-auto px-8 py-16">
+                <!-- Back button -->
+                <button onclick="showPage('blog')" 
+                        class="flex items-center gap-x-3 text-zinc-400 hover:text-white transition-colors mb-8">
+                    <i class="fa-solid fa-arrow-left text-lg"></i>
+                    <span class="text-lg font-medium">Back to all articles</span>
+                </button>
+
+                <!-- Article content -->
+                <div id="blog-article-content" class="space-y-8">
+                    <!-- Article will be dynamically loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact-page" class="page hidden">
+            <div class="max-w-screen-2xl mx-auto px-8 py-20">
+                <div class="grid lg:grid-cols-2 gap-20">
+                    <!-- Left Column -->
+                    <div>
+                        <h2 class="text-5xl font-semibold leading-none">Let's build<br>something great</h2>
+                        <p class="mt-8 text-xl text-zinc-400 max-w-md">
+                            I'm always open to discussing new opportunities, collaborations, or just saying hi!
+                        </p>
+
+                        <div class="mt-16 space-y-8">
+                            <!-- Email -->
+                            <div class="flex items-center gap-6">
+                                <div class="w-12 h-12 bg-zinc-900 rounded-2xl flex items-center justify-center text-2xl">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-zinc-500">Email me directly</div>
+                                    <a id="contact-email" href="#" class="text-xl hover:text-emerald-400">jwaduge819@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp -->
+                            <div class="flex items-center gap-6">
+                                <div class="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-2xl">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm text-zinc-500">Message on WhatsApp</div>
+                                    <a id="contact-whatsapp" href="#" target="_blank" class="text-xl hover:text-emerald-400">+94775896223</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="bg-zinc-900 rounded-3xl p-10">
+                        <form id="contact-form" action="https://formspree.io/f/mlgwowkl" method="POST" class="space-y-8">
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Your Name</label>
+                                <input type="text" name="name" required
+                                       class="w-full bg-zinc-800 border border-transparent focus:border-emerald-500 rounded-2xl px-6 py-5 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Email Address</label>
+                                <input type="email" name="email" required
+                                       class="w-full bg-zinc-800 border border-transparent focus:border-emerald-500 rounded-2xl px-6 py-5 outline-none transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase tracking-widest text-zinc-500 mb-2">Message</label>
+                                <textarea name="message" rows="6" required
+                                          class="w-full bg-zinc-800 border border-transparent focus:border-emerald-500 rounded-3xl px-6 py-5 outline-none transition-all resize-none"></textarea>
+                            </div>
+                            <button type="submit"
+                                    class="w-full bg-emerald-500 hover:bg-emerald-600 py-6 rounded-2xl font-semibold text-lg transition-all">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-zinc-950 border-t border-zinc-900 py-12">
+        <div class="max-w-screen-2xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-y-6 text-sm text-zinc-500">
+            <div>© 2026 JanithWaduge. All rights reserved.</div>
+            <div class="flex gap-x-8">
+                <a href="#" onclick="showPage('home')" class="hover:text-zinc-300">Home</a>
+                <a href="#" onclick="showPage('projects')" class="hover:text-zinc-300">Projects</a>
+                <a href="#" onclick="showPage('blog')" class="hover:text-zinc-300">Blog</a>
+            </div>
+            <div>Made with W2 Tec Solutions in Anuradhapura, Sri Lanka</div>
+        </div>
+    </footer>
+
+    <!-- PROJECT MODAL -->
+        <div id="project-modal" class="hidden fixed inset-0 bg-black/90 flex items-center justify-center z-[100] p-4 sm:p-6">
+            <div class="modal bg-zinc-900 max-w-4xl w-full rounded-2xl sm:rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto">
+                <div class="relative">
+                    <button onclick="closeProjectModal()" 
+                            class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-11 sm:h-11 bg-black/60 hover:bg-black/90 rounded-2xl flex items-center justify-center text-xl sm:text-2xl z-10">
+                        ✕
+                    </button>
+                    <img id="modal-project-image" class="w-full h-48 sm:h-96 object-cover" alt="">
+                </div>
+                <div class="p-6 sm:p-10">
+                    <div id="modal-project-tech" class="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"></div>
+                    <h3 id="modal-project-title" class="text-2xl sm:text-4xl font-semibold"></h3>
+                    <p id="modal-project-date" class="text-emerald-400 text-xs sm:text-sm mt-2"></p>
+                    
+                    <div id="modal-project-desc" class="prose prose-invert mt-6 sm:mt-10 text-zinc-300 leading-relaxed text-sm sm:text-lg"></div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 sm:mt-12">
+                        <a id="modal-github-btn" target="_blank"
+                           class="flex-1 py-4 sm:py-6 bg-zinc-800 hover:bg-zinc-700 rounded-2xl flex items-center justify-center gap-x-3 font-medium text-sm sm:text-base">
+                            <i class="fa-brands fa-github"></i>
+                            <span>View Code</span>
+                        </a>
+                        <a id="modal-live-btn" target="_blank"
+                           class="flex-1 py-4 sm:py-6 bg-emerald-500 hover:bg-emerald-600 rounded-2xl flex items-center justify-center gap-x-3 font-semibold text-sm sm:text-base">
+                            <span>Live Demo</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Tailwind script already loaded via CDN
+        function initTailwind() {
+            // Already configured via CDN
+        }
+
+        // Data storage
+        let homeData = {};
+        let projectsData = [];
+        let blogsData = [];
+
+        // Current page
+        let currentPage = 'home';
+
+        // Load all JSON data
+        async function loadData() {
+            try {
+                // Home.json
+                const homeRes = await fetch('./Home.json');
+                homeData = await homeRes.json();
+
+                // Projects.json
+                const projRes = await fetch('./Projects.json');
+                projectsData = await projRes.json();
+
+                // Blog.json
+                const blogRes = await fetch('./Blog.json');
+                blogsData = await blogRes.json();
+
+                // Render everything
+                renderHome();
+                renderProjects();
+                renderBlogs();
+                renderSocialLinks();
+
+            } catch (e) {
+                console.error("Failed to load JSON files. Make sure they are in the same folder as index.html", e);
+                alert("Please create Home.json, Projects.json and Blog.json in the same folder (see instructions below).");
+            }
+        }
+
+        function renderHome() {
+            // Hero
+            document.getElementById('hero-name').textContent = homeData.fullName || homeData.name || "Chamuditha";
+            document.getElementById('hero-title').textContent = homeData.title || "Software Engineer";
+            document.getElementById('hero-summary').textContent = homeData.summary || "";
+            document.getElementById('hero-image').src = homeData.profileImage || "https://picsum.photos/id/64/600/600";
+            
+            // Contact info
+            const emailEl = document.getElementById('hero-email');
+            emailEl.textContent = homeData.email || "jwaduge819@gmail.com";
+            emailEl.href = `mailto:${homeData.email}`;
+            
+            document.getElementById('hero-location').textContent = homeData.location || "Colombo, Sri Lanka";
+
+            // About bio
+            const bioDiv = document.getElementById('about-bio');
+            bioDiv.innerHTML = `<p>${homeData.bio || "Experienced software engineer passionate about clean code and beautiful interfaces."}</p>`;
+
+            // Education
+            const eduContainer = document.getElementById('education-list');
+            eduContainer.innerHTML = '';
+            (homeData.education || []).forEach(edu => {
+                const div = document.createElement('div');
+                div.className = "border-l-2 border-emerald-500 pl-6";
+                div.innerHTML = `
+                    <div class="text-emerald-400 text-sm">${edu.years}</div>
+                    <div class="font-semibold text-xl">${edu.degree}</div>
+                    <div class="text-zinc-400">${edu.institution}</div>
+                    ${edu.gpa ? `<div class="text-xs text-zinc-500 mt-1">GPA: ${edu.gpa}</div>` : ''}
+                `;
+                eduContainer.appendChild(div);
+            });
+
+            // Skills
+            const skillsContainer = document.getElementById('skills-grid');
+            skillsContainer.innerHTML = '';
+            (homeData.skills || []).forEach(skill => {
+                const pill = document.createElement('div');
+                pill.className = "bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-3xl px-7 py-4 text-center font-medium transition-all hover:border-emerald-500";
+                pill.textContent = skill;
+                skillsContainer.appendChild(pill);
+            });
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('projects-grid');
+            container.innerHTML = '';
+            
+            projectsData.forEach(project => {
+                const card = document.createElement('div');
+                card.className = `project-card bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer group`;
+                card.innerHTML = `
+                    <div class="relative overflow-hidden h-48 sm:h-56">
+                        <img src="${project.image}" class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110" alt="${project.title}">
+                        <div class="absolute top-3 right-3 sm:top-4 sm:right-4 bg-black/70 text-[10px] font-mono tracking-widest px-3 py-1 rounded-2xl">${project.date}</div>
+                    </div>
+                    <div class="p-5 sm:p-7">
+                        <h4 class="font-semibold text-lg sm:text-2xl line-clamp-2">${project.title}</h4>
+                        <p class="text-zinc-400 mt-2 sm:mt-3 text-sm sm:text-base line-clamp-2 sm:line-clamp-3">${project.shortDesc}</p>
+                        
+                        <div class="flex gap-2 mt-4 sm:mt-6 flex-wrap">
+                            ${project.tech.map(t => `<span class="text-[9px] sm:text-[10px] bg-zinc-800 px-2 sm:px-3 py-1 rounded-3xl">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => showProjectModal(project.id);
+                container.appendChild(card);
+            });
+        }
+
+        function renderBlogs() {
+            const container = document.getElementById('blog-grid');
+            container.innerHTML = '';
+            
+            blogsData.forEach(blog => {
+                const card = document.createElement('div');
+                card.className = `bg-zinc-900 rounded-3xl overflow-hidden cursor-pointer group`;
+                card.innerHTML = `
+                    <div class="relative overflow-hidden h-48 sm:h-56">
+                        <img src="${blog.image}" class="w-full h-full object-cover transition-all duration-300 group-hover:scale-110" alt="">
+                    </div>
+                    <div class="p-5 sm:p-8">
+                        <div class="text-emerald-400 text-xs">${blog.date}</div>
+                        <h4 class="font-semibold text-lg sm:text-2xl mt-2 sm:mt-3 line-clamp-2">${blog.title}</h4>
+                        <p class="text-zinc-400 mt-2 sm:mt-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-3">${blog.excerpt}</p>
+                    </div>
+                `;
+                card.onclick = () => showBlogArticle(blog.id);
+                container.appendChild(card);
+            });
+        }
+
+        function renderSocialLinks() {
+            const linksHTML = `
+                <a href="${homeData.linkedin || '#'}" target="_blank" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-linkedin text-2xl"></i></a>
+                <a href="${homeData.github || '#'}" target="_blank" class="hover:text-emerald-400 transition-colors"><i class="fa-brands fa-github text-2xl"></i></a>
+            `;
+            
+            document.getElementById('nav-social').innerHTML = linksHTML;
+            document.getElementById('mobile-social').innerHTML = linksHTML;
+        }
+
+        // Modal functions
+        let currentProject = null;
+        
+        function showProjectModal(id) {
+            currentProject = projectsData.find(p => p.id === id);
+            if (!currentProject) return;
+
+            document.getElementById('modal-project-image').src = currentProject.image;
+            document.getElementById('modal-project-title').textContent = currentProject.title;
+            document.getElementById('modal-project-date').textContent = currentProject.date;
+            document.getElementById('modal-project-desc').innerHTML = `<p class="leading-relaxed">${currentProject.longDesc.replace(/\n/g, '<\/p><p class="mt-6">')}<\/p>`;
+
+            // Tech tags
+            const techDiv = document.getElementById('modal-project-tech');
+            techDiv.innerHTML = currentProject.tech.map(t => 
+                `<span class="bg-zinc-800 text-xs px-5 py-2 rounded-3xl">${t}<\/span>`
+            ).join('');
+
+            // Buttons
+            document.getElementById('modal-github-btn').href = currentProject.github || '#';
+            document.getElementById('modal-live-btn').href = currentProject.live || '#';
+            if (!currentProject.live) {
+                document.getElementById('modal-live-btn').classList.add('hidden');
+            } else {
+                document.getElementById('modal-live-btn').classList.remove('hidden');
+            }
+
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.getElementById('project-modal').classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function showBlogArticle(id) {
+            const blog = blogsData.find(b => b.id === id);
+            if (!blog) return;
+
+            const contentContainer = document.getElementById('blog-article-content');
+            contentContainer.innerHTML = `
+                <img src="${blog.image}" class="w-full h-64 sm:h-80 object-cover rounded-2xl" alt="${blog.title}">
+                <div class="text-emerald-400 text-sm">${blog.date}</div>
+                <h2 class="text-3xl sm:text-4xl font-semibold mt-4 leading-tight">${blog.title}</h2>
+                <div class="prose prose-invert mt-8 max-w-none text-zinc-200 text-base sm:text-lg">
+                    ${blog.content || '<p>Full article content goes here...</p>'}
+                </div>
+            `;
+
+            showPage('blog-article');
+        }
+
+        // Page switching
+        function showPage(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            
+            // Show requested
+            const target = document.getElementById(page + '-page');
+            if (target) target.classList.remove('hidden');
+
+            currentPage = page;
+
+            // Update active nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'text-emerald-400');
+                if (link.getAttribute('onclick').includes(`'${page}'`)) {
+                    link.classList.add('active', 'text-emerald-400');
+                }
+                // For blog article page, keep blog nav link active
+                if (page === 'blog-article' && link.getAttribute('onclick').includes(`'blog'`)) {
+                    link.classList.add('active', 'text-emerald-400');
+                }
+            });
+        }
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        }
+
+        // Form handling (works with Formspree or any endpoint)
+        function setupForm() {
+            const form = document.getElementById('contact-form');
+            form.addEventListener('submit', function(e) {
+                // Formspree will handle submission automatically
+                // You can add success feedback here if you want
+                setTimeout(() => {
+                    if (form.action.includes('formspree')) {
+                        alert("✅ Thank you! Your message has been sent.");
+                        form.reset();
+                    }
+                }, 800);
+            });
+        }
+
+        // Close project modal when clicking outside content
+        function setupModals() {
+            const projModal = document.getElementById('project-modal');
+            
+            projModal.addEventListener('click', function(e) {
+                if (e.target === projModal) closeProjectModal();
+            });
+        }
+
+        // Keyboard escape support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                const projModal = document.getElementById('project-modal');
+                if (!projModal.classList.contains('hidden')) closeProjectModal();
+            }
+        });
+
+        // Initialize everything
+        window.onload = function() {
+            initTailwind();
+            loadData();
+            setupForm();
+            setupModals();
+            
+            // Show home page by default
+            showPage('home');
+            
+            // Demo WhatsApp link (will be updated after data loads)
+            setTimeout(() => {
+                const waLink = document.getElementById('contact-whatsapp');
+                if (homeData.phone) {
+                    const cleanPhone = homeData.phone.replace(/\D/g, '');
+                    waLink.href = `https://wa.me/${cleanPhone}`;
+                }
+            }, 1200);
+        };
+    </script>
+</body>
+</html>
