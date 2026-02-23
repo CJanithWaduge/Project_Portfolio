@@ -110,7 +110,6 @@
                 <a onclick="showPage('contact');toggleMobileMenu()" class="hover:text-emerald-400">Contact</a>
                 
                 <div class="pt-6 border-t border-zinc-700 flex gap-x-8 text-2xl" id="mobile-social"></div>
-                <a href="https://www.linkedin.com/in/janithwaduge/" target="_blank" class="hover:text-emerald-400 transition-colors" title="LinkedIn"><i class="fa-brands fa-linkedin text-2xl"></i></a>
             </div>
         </div>
     </nav>
@@ -212,7 +211,7 @@
                         <span class="text-emerald-400 text-sm font-medium tracking-widest">PORTFOLIO</span>
                         <h2 class="text-5xl font-semibold mt-2">Featured Projects</h2>
                     </div>
-                    <a href="https://github.com/chamuditha" target="_blank"
+                    <a id="projects-github-link" href="#" target="_blank"
                        class="hidden md:flex items-center gap-x-3 text-zinc-400 hover:text-white transition-colors">
                         <span class="text-sm">All on GitHub</span>
                         <i class="fa-brands fa-github text-2xl"></i>
@@ -517,6 +516,12 @@
             
             document.getElementById('nav-social').innerHTML = linksHTML;
             document.getElementById('mobile-social').innerHTML = linksHTML;
+            
+            // Update the "All on GitHub" link in projects section
+            const githubLink = document.getElementById('projects-github-link');
+            if (githubLink) {
+                githubLink.href = homeData.github || '#';
+            }
         }
 
         // Modal functions
