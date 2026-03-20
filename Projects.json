@@ -42,5 +42,16 @@
     "github": "https://github.com/CJanithWaduge/Agency-Management-System",
     "live": "",
     "date": "May 2, 2025"
-  }
+  },
+  {
+  "id": 5,
+  "title": "Box Box Box – F1 Pit Strategy Optimizer",
+  "shortDesc": "",
+  "longDesc": "Reverse-engineered a deterministic Formula 1 race simulation engine from 30,000 historical races. Built a high-accuracy pit strategy predictor that reads JSON input and outputs the exact 1st-to-20th finishing order. Focused on modeling tire degradation, compound offsets, temperature effects, and optimal multi-stop strategies. Achieved strong performance on 100 hidden test cases in a competitive coding challenge.",
+  "image": "Images/Projects/Box-Box-Box-F1/Box-Box-Box-F1.png",
+  "tech": ["Python", "Algorithm Design", "Data Analysis", "Reverse Engineering"],
+  "github": "https://github.com/CJanithWaduge/box-box-box",
+  "live": "",
+  "date": "March 2025"
+}
 ]

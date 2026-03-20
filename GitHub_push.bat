@@ -1,0 +1,3 @@
+git add .
+git commit -m "Added new project"
+git push origin main
