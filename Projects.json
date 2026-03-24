@@ -39,7 +39,7 @@
     "id": 4,
     "title": "Agency-Management-System(real world project)",
     "shortDesc": "",
-    "longDesc": "Agency management system built with React + Vite and packaged as a desktop app using Electron. It uses SQLite for storage, Tailwind for UI, Recharts for visualizations, jsPDF for PDF exports, React Router for navigation, and Lucide icons. ESLint ensures code quality.",
+    "longDesc": "This Agency Management System is a comprehensive ERP solution designed to streamline operations for distribution and trading businesses. It provides a centralized platform to manage multi-location inventory, route-based sales, and complex credit tracking with automated installment management. By integrating real-time financial analytics and professional reporting, the system empowers clients to optimize their supply chain and monitor profitability accurately. Built with a modern tech stack, the application leverages React 19 and Vite for a responsive frontend, Firebase for secure authentication, and Dexie.js (IndexedDB) for robust local data management. It also features Recharts for data visualization and jsPDF/SheetJS for seamless document exporting.",
     "image": "Images/Projects/Agency-Management-System/1.png",
     "images": [
       "Images/Projects/Agency-Management-System/1.png",
