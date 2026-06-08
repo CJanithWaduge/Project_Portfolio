@@ -66,5 +66,22 @@
   "github": "https://github.com/CJanithWaduge/box-box-box",
   "live": "",
   "date": "March 2025"
-}
+  },
+  {
+    "id": 6,
+    "title": "Lumina Fine Art Photography",
+    "shortDesc": "A custom CMS and luxury photography portfolio platform built from scratch with serverless architecture.",
+    "longDesc": "A premium digital portfolio for a professional photographer. Built with Next.js 16 static export for zero-cost hosting on a global CDN. Heavy Firebase SDK code is isolated to admin pages only, keeping visitor pages lightweight. Features include GPU-optimized scroll animations, a fully responsive mobile admin dashboard for CRUD gallery management, Meta WhatsApp API notifications, HTML email receipts, and secure data updates with Cloud Firestore security rules and Admin SDK API routes.",
+    "image": "Images/Projects/Lumina-Photography/homepage-w.png",
+    "images": [
+      "Images/Projects/Lumina-Photography/homepage-w.png",
+      "Images/Projects/Lumina-Photography/Love-story-w.png",
+      "Images/Projects/Lumina-Photography/Investment-w.png",
+      "Images/Projects/Lumina-Photography/Contact-w.png"
+    ],
+    "tech": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion 12", "Firebase", "Cloud Firestore", "Meta WhatsApp API"],
+    "github": "",
+    "live": "https://lumina-fine-art-photography.vercel.app/",
+    "date": "Jun 2026"
+  }
 ]
