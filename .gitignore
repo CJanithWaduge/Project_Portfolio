@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.local
+
+# Node (even if not currently used, prevents future clutter)
+node_modules/
+
+# Scratch notes
+GitHub.txt
+
+# Old profile image (replaced by .jpg)
+Images/profile_image/profile_image.png

@@ -221,7 +221,7 @@
                         <div class="relative">
                             <div class="absolute -inset-6 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-[4rem] -rotate-6"></div>
                             <img id="hero-image" 
-                                 src="Images/profile_image/profile_image.png" 
+                                 src="Images/profile_image/profile_image.jpg" 
                                  alt="Chamuditha"
                                  class="w-80 h-80 md:w-96 md:h-96 object-cover rounded-3xl shadow-2xl border-8 border-zinc-900 relative z-10">
                         </div>
@@ -444,16 +444,19 @@
         // Load all JSON data
         async function loadData() {
             try {
+                // Cache-busting timestamp
+                const cacheBreaker = `?v=${Date.now()}`;
+
                 // Home.json
-                const homeRes = await fetch('./Home.json');
+                const homeRes = await fetch('./Home.json' + cacheBreaker);
                 homeData = await homeRes.json();
 
                 // Projects.json
-                const projRes = await fetch('./Projects.json');
+                const projRes = await fetch('./Projects.json' + cacheBreaker);
                 projectsData = await projRes.json();
 
                 // Blog.json
-                const blogRes = await fetch('./Blog.json');
+                const blogRes = await fetch('./Blog.json' + cacheBreaker);
                 blogsData = await blogRes.json();
 
                 // Render everything
