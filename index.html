@@ -124,6 +124,21 @@
     </style>
 </head>
 <body class="tail-container bg-zinc-950 text-zinc-100 overflow-x-hidden">
+    <!-- DATA LOAD ERROR BANNER (stays hidden unless a JSON file fails to load) -->
+    <div id="data-error-banner" class="hidden fixed bottom-0 inset-x-0 z-[60] bg-red-950/95 border-t border-red-800 backdrop-blur px-6 py-4">
+        <div class="max-w-screen-2xl mx-auto flex items-start gap-4">
+            <i class="fa-solid fa-triangle-exclamation text-red-400 text-xl mt-0.5"></i>
+            <div class="flex-1">
+                <p id="data-error-title" class="text-red-200 font-semibold text-sm sm:text-base"></p>
+                <p id="data-error-detail" class="text-red-300/80 text-xs sm:text-sm mt-1 leading-relaxed"></p>
+            </div>
+            <button onclick="document.getElementById('data-error-banner').classList.add('hidden')"
+                    class="text-red-300 hover:text-white transition-colors text-lg leading-none" aria-label="Dismiss">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </div>
+
     <!-- NAVBAR -->
     <nav class="fixed top-0 left-0 right-0 bg-zinc-900/90 backdrop-blur-lg border-b border-zinc-800 z-50">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
@@ -441,34 +456,87 @@
         // Current page
         let currentPage = 'home';
 
-        // Load all JSON data
-        async function loadData() {
-            try {
-                // Cache-busting timestamp
-                const cacheBreaker = `?v=${Date.now()}`;
+        // Load a single JSON file.
+        // Throws a readable error so the caller can report which file failed.
+        async function loadJsonFile(fileName) {
+            // Cache-busting timestamp
+            const cacheBreaker = `?v=${Date.now()}`;
 
-                // Home.json
-                const homeRes = await fetch('./Home.json' + cacheBreaker);
-                homeData = await homeRes.json();
-
-                // Projects.json
-                const projRes = await fetch('./Projects.json' + cacheBreaker);
-                projectsData = await projRes.json();
-
-                // Blog.json
-                const blogRes = await fetch('./Blog.json' + cacheBreaker);
-                blogsData = await blogRes.json();
-
-                // Render everything
-                renderHome();
-                renderProjects();
-                renderBlogs();
-                renderSocialLinks();
-
-            } catch (e) {
-                console.error("Failed to load JSON files. Make sure they are in the same folder as index.html", e);
-                alert("Please create Home.json, Projects.json and Blog.json in the same folder (see instructions below).");
+            const res = await fetch('./' + fileName + cacheBreaker);
+            if (!res.ok) {
+                throw new Error(`${fileName} could not be loaded (HTTP ${res.status})`);
             }
+
+            try {
+                return await res.json();
+            } catch (e) {
+                throw new Error(`${fileName} is not valid JSON (${e.message})`);
+            }
+        }
+
+        // Load all JSON data.
+        // Each file is loaded independently: one bad file must not blank the whole site.
+        async function loadData() {
+            const failures = [];
+
+            const load = async (fileName, apply) => {
+                try {
+                    apply(await loadJsonFile(fileName));
+                    return true;
+                } catch (e) {
+                    failures.push(e.message);
+                    console.error('[portfolio] ' + e.message, e);
+                    return false;
+                }
+            };
+
+            await Promise.all([
+                load('Home.json',    (d) => { homeData    = d || {}; }),
+                load('Projects.json',(d) => { projectsData = d || []; }),
+                load('Blog.json',    (d) => { blogsData   = d || []; })
+            ]);
+
+            // Render whatever loaded successfully - the renderers fall back to
+            // sensible defaults for any field that is missing.
+            renderHome();
+            renderProjects();
+            renderBlogs();
+            renderSocialLinks();
+
+            if (failures.length) {
+                showDataError(failures);
+            }
+        }
+
+        // Report load failures in a dismissible banner instead of a blocking alert.
+        function showDataError(failures) {
+            const banner = document.getElementById('data-error-banner');
+            const title = document.getElementById('data-error-title');
+            const detail = document.getElementById('data-error-detail');
+            if (!banner) return;
+
+            const code = (text) => `<span class="font-mono text-red-200">${text}</span>`;
+
+            if (location.protocol === 'file:') {
+                // The files are in this folder - the browser just refuses to read them.
+                title.textContent = 'Previewing from disk - the data files could not be read.';
+                detail.innerHTML =
+                    'Browsers block ' + code('fetch()') + ' for local files when a page is opened with ' +
+                    code('file://') + ', so Home.json / Projects.json / Blog.json were not loaded even though ' +
+                    'they sit in this folder.<br>' +
+                    'To preview locally, run ' + code('preview.cmd') + ' (Windows) or ' + code('./preview.sh') +
+                    ' (macOS/Linux) in this folder and open ' + code('http://localhost:8000') + '. ' +
+                    'The live site is ' + code('https://cjanithwaduge.github.io/Project_Portfolio/') + '.';
+            } else {
+                title.textContent = failures.length === 1
+                    ? 'One data file could not be loaded.'
+                    : `${failures.length} data files could not be loaded.`;
+                detail.innerHTML =
+                    failures.map((f) => code(f)).join(' · ') +
+                    ' — check that each file is in the same folder as index.html and contains valid JSON.';
+            }
+
+            banner.classList.remove('hidden');
         }
 
         function renderHome() {

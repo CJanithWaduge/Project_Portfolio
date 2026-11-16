@@ -1,0 +1,9 @@
+# Keep line endings predictable across platforms.
+# The preview scripts are shell/batch files and break if the endings drift
+# (a CRLF shebang makes ./preview.sh fail on macOS/Linux).
+*.sh text eol=lf
+*.cmd text eol=crlf
+
+# Keep the data files as plain UTF-8 text.
+*.json text eol=lf
+*.html text eol=lf
