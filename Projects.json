@@ -83,5 +83,23 @@
     "github": "",
     "live": "https://lumina-fine-art-photography.vercel.app/",
     "date": "Jun 2026"
+  },
+  {
+    "id": 7,
+    "title": "Rajarata Engineering — Corporate Website & CMS",
+    "shortDesc": "Production marketing site and headless CMS for an electrical engineering contractor, built with Astro, TypeScript and Firebase.",
+    "longDesc": "A complete web platform for Rajarata Engineering, an electrical engineering and contracting company working across MV/LV distribution, industrial installations, testing and commissioning, and ELV automation. The public site is fully static — Astro 7 pre-renders five pages to plain HTML, CSS and JavaScript and serves them from Firebase Hosting with no server runtime. Content lives in Cloud Firestore, so a paired React admin dashboard lets the owner edit every string, image and contact detail without touching code, and edits reach open tabs live through Firestore listeners with no rebuild and no deploy.\n\nEngineering highlights: SEO-oriented static output served with CSP and security headers, self-hosted fonts and icon subsets with zero third-party origins, scroll-reveal and card-tilt interactions that respect prefers-reduced-motion and keep content readable without JavaScript, WhatsApp and phone contact channels with international number normalisation, and a deploy pipeline gated behind a content and security audit that blocks placeholder markers, leaked credential patterns and source maps from ever reaching production. Covered by an automated node:test suite of 9 suites and 60 cases on the public site, with the admin panel adding 355 Vitest cases including Firebase emulator tests.",
+    "image": "Images/Projects/Rajarata_Engineering/Home_page.png",
+    "images": [
+      "Images/Projects/Rajarata_Engineering/Home_page.png",
+      "Images/Projects/Rajarata_Engineering/Services_page.png",
+      "Images/Projects/Rajarata_Engineering/Projects_page.png",
+      "Images/Projects/Rajarata_Engineering/About_us_page.png",
+      "Images/Projects/Rajarata_Engineering/Contact_page.png"
+    ],
+    "tech": ["Astro 7", "TypeScript", "Tailwind CSS 4", "Firebase", "Cloud Firestore", "React 19", "Node.js"],
+    "github": "https://github.com/CJanithWaduge/Rajarata-Engineering",
+    "live": "https://rajarata-engineering.web.app/",
+    "date": "Nov 2026"
   }
 ]

@@ -17,5 +17,5 @@
       "years": "2022 - 2025"
     }
   ],
-  "skills": ["HTML", "CSS", "JavaScript", "React", "Next.js", "Node.js", "TypeScript", "Python","Java", "PostgreSQL", "Tailwind CSS", "POS Systems", "ERP Solutions", "MySQL", "MongoDB", "Git", "Docker", "AI Tools"]
+  "skills": ["HTML", "CSS", "JavaScript", "React", "Next.js", "Astro", "Node.js", "TypeScript", "Python","Java", "PostgreSQL", "Tailwind CSS", "Firebase", "Cloud Firestore", "POS Systems", "ERP Solutions", "MySQL", "MongoDB", "Git", "Docker", "AI Tools"]
 }
