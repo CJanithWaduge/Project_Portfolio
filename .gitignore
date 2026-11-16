@@ -1,20 +1,55 @@
 # OS
 .DS_Store
 Thumbs.db
-*.log
+ehthumbs.db
+desktop.ini
 
-# IDE
+# IDE / editor
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+*.bak
 
-# Env
+# Logs (also covers tool and server logs)
+*.log
+
+# Env / secrets
 .env
-.env.local
+.env.*
+!.env.example
 
 # Node (even if not currently used, prevents future clutter)
 node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.vite/
+.astro/
+
+# Python (used for the local preview server and other tooling)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Build output / deploy artifacts
+dist/
+build/
+.vercel/
+.netlify/
+.firebase/
+*.tsbuildinfo
+
+# AI / editor tooling state (session logs, local caches, instructions)
+.opencode/
+.claude/
+.cursor/
+.aider*
+AGENTS.local.md
 
 # Scratch notes
 GitHub.txt
